@@ -15,5 +15,6 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           unityVersion: 2020.3.20f1
+        with:
           name: ${{ steps.getManualLicenseFile.outputs.filePath }}
           path: ${{ steps.getManualLicenseFile.outputs.filePath }}
