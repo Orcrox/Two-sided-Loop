@@ -11,5 +11,4 @@ jobs:
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
-          projectPath: Two-sided-Loop/
           githubToken: ${{ secrets.GITHUB_TOKEN }}
