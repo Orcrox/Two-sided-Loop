@@ -9,7 +9,7 @@ jobs:
     steps:
       # Manual Activation
       - name: Manual Activation
-      uses: game-ci/unity-test-runner@v2
+        uses: game-ci/unity-test-runner@v2
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
