@@ -14,16 +14,10 @@ jobs:
       matrix:
         projectPath:
           - ./
-        testMode:
-          - playmode
-          - editmode
         targetPlatform:
           - StandaloneWindows64 # Build a Windows 64-bit standalone.
           - WebGL # WebGL.
-          #- StandaloneOSX # Build a macOS standalone (Intel 64-bit).
-          #- StandaloneLinux64 # Build a Linux 64-bit standalone.
-          #- iOS # Build an iOS player.
-          #- Android # Build an Android player.
+
     steps:
       # Checkout
       - name: Checkout Code
@@ -63,10 +57,7 @@ jobs:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
           projectPath: ${{ matrix.projectPath }}
-          #testMode: ${{ matrix.testMode }}
-          #artifactsPath: ${{ matrix.testMode }}-artifacts
           githubToken: ${{ secrets.GITHUB_TOKEN }}
-          #checkName: ${{ matrix.testMode }} Test Results
       - uses: actions/upload-artifact@v2
         if: always()
         with:
