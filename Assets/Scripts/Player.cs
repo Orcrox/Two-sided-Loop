@@ -6,7 +6,7 @@ public class Player : MonoBehaviour {
     private Rigidbody2D rb;
     private Vector2 input;
 
-    void OnEnable() {
+    void Awake() {
         GameManager.Instance.player = this.gameObject;
     }
 
