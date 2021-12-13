@@ -7,7 +7,6 @@ on:
 
 jobs:
   buildWebGL:
-    needs: testProject
     name: Build for WebGL
     runs-on: ubuntu-latest
     strategy:
@@ -89,7 +88,6 @@ jobs:
           folder: build/WebGL
 
   buildWindows:
-    needs: testProject
     name: Build for Windows
     runs-on: ubuntu-latest
     strategy:
