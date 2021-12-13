@@ -25,7 +25,7 @@ public class Player : MonoBehaviour {
     }
 
     private void move() {
-        rb.velocity = input;
+        rb.velocity = new Vector2(input.x, rb.velocity.y);
     }
 
 }
