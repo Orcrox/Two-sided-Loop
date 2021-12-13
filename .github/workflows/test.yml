@@ -14,9 +14,6 @@ jobs:
       matrix:
         projectPath:
           - ./
-        testMode:
-          - playmode
-          - editmode
     steps:
       # Checkout
       - name: Checkout Code
@@ -51,20 +48,18 @@ jobs:
       # Test
       - name: Run Tests
         uses: game-ci/unity-test-runner@v2
-        id: tests
+        id: testRunner
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
           projectPath: ${{ matrix.projectPath }}
-          testMode: ${{ matrix.testMode }}
-          artifactsPath: ${{ matrix.testMode }}-artifacts
+          unityVersion: ${{ matrix.unityVersion }}
           githubToken: ${{ secrets.GITHUB_TOKEN }}
-          checkName: ${{ matrix.testMode }} Test Results
       - uses: actions/upload-artifact@v2
         if: always()
         with:
-          name: Test results for ${{ matrix.testMode }}
-          path: ${{ steps.tests.outputs.artifactsPath }}
+          name: Test results (all modes)
+          path: ${{ steps.testRunner.outputs.artifactsPath }}
 
   mergeMain:
     needs: testProject
@@ -76,7 +71,7 @@ jobs:
         projectPath:
           - ./
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v2
 
       - name: Merging to main
         uses: devmasx/merge-branch@master
@@ -85,3 +80,9 @@ jobs:
           from_branch: dev
           target_branch: main
           github_token: ${{ github.token }}
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
