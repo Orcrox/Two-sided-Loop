@@ -4,12 +4,9 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
-  build:
+  buildProject:
   name: Build for ${{ matrix.targetPlatform }}
     runs-on: ubuntu-latest
     strategy:
@@ -71,7 +68,7 @@ jobs:
           path: build/${{ matrix.targetPlatform }}
 
   deployGHP:
-    needs: build
+    needs: buildProject
     name: Deploy to Github Pages
     runs-on: ubuntu-latest
     strategy:
