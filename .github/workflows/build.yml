@@ -51,6 +51,7 @@ jobs:
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
+          customParameters: -WebGLCompressionFormat Disabled
           projectPath: ${{ matrix.projectPath }}
           targetPlatform: WebGL
 
