@@ -16,16 +16,23 @@ public class Player : MonoBehaviour {
 
 
     private void Update() {
-        getMovement();
+        getInput();
         move();
+        jump();
     }
 
-    private void getMovement() {
+    private void getInput() {
         input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
     }
 
     private void move() {
         rb.velocity = new Vector2(input.x, rb.velocity.y);
+    }
+
+    private void jump() {
+        if (input.y == 1) {
+            rb.velocity = new Vector2(rb.velocity.x, input.y * 5);
+        }
     }
 
 }
